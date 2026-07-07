@@ -4,26 +4,41 @@
 <head>
     <title>Benelux University</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 </head>
 
 <body>
 
-    <h1>Benelux University</h1>
+    <div class="container">
+        <div class="search-section">
+            <h1>Benelux University</h1>
 
-    <input
-        type="text"
-        id="searchInput"
-        placeholder="Search university..."
-    >
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search university..."
+            >
 
-    <button onclick="searchUniversity()">
-        Search
-    </button>
+            <button onclick="searchUniversity()">
+                Search
+            </button>
+        </div>
 
-    <div id="results"></div>
+        <div class="content-wrapper">
+            <div id="map"></div>
+            <div id="results"></div>
+        </div>
+    </div>
 
-    <script src="university.js"></script>
-    <script src="script.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="University.js"></script>
+    <script src="Script.js"></script>
+    <script>
+        // Initialize map when page loads
+        window.addEventListener('DOMContentLoaded', initMap);
+    </script>
 
 </body>
 
