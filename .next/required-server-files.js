@@ -104,7 +104,7 @@ self.__SERVER_FILES_MANIFEST={
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "/home/jonas/BasicCodeLearningJavascriptHTML",
+    "outputFileTracingRoot": "/home/jonas/scholarships",
     "cacheComponents": false,
     "cacheLife": {
       "default": {
@@ -304,11 +304,11 @@ self.__SERVER_FILES_MANIFEST={
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.ts",
     "turbopack": {
-      "root": "/home/jonas/BasicCodeLearningJavascriptHTML"
+      "root": "/home/jonas/scholarships"
     },
     "distDirRoot": ".next"
   },
-  "appDir": "/home/jonas/BasicCodeLearningJavascriptHTML",
+  "appDir": "/home/jonas/scholarships",
   "relativeAppDir": "",
   "files": [
     ".next/package.json",

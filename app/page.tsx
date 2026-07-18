@@ -1,12 +1,16 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import { universities, type University } from "@/data/universities";
+
+const NearbyMap = dynamic(() => import("./components/NearbyMap"), { ssr: false });
 
 export default function Home() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<University[]>([]);
   const [searched, setSearched] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -88,6 +92,12 @@ export default function Home() {
             <a href="#how-it-works" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, color: "oklch(42% 0.03 245)", padding: "8px 14px", borderRadius: 7 }}>How it works</a>
             <a href="#universities" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, color: "oklch(42% 0.03 245)", padding: "8px 14px", borderRadius: 7 }}>Universities</a>
             <a href="#mission" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, color: "oklch(42% 0.03 245)", padding: "8px 14px", borderRadius: 7 }}>Our Mission</a>
+            <button
+              onClick={() => setShowMap(true)}
+              style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "'DM Sans',sans-serif", fontSize: 13.5, fontWeight: 500, color: "oklch(38% 0.16 245)", background: "oklch(94% 0.05 245)", padding: "9px 16px", borderRadius: 7, marginLeft: 10, whiteSpace: "nowrap", border: "none", cursor: "pointer" }}
+            >
+              📍 Search closest to you
+            </button>
             <a href="#search" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 500, color: "white", background: "oklch(40% 0.18 245)", padding: "9px 20px", borderRadius: 7, marginLeft: 10, whiteSpace: "nowrap" }}>Search scholarships →</a>
           </nav>
         </div>
@@ -163,7 +173,7 @@ export default function Home() {
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 40px", display: "flex", justifyContent: "center", gap: 72, flexWrap: "wrap" }}>
           {[
             { value: "3", label: "Countries", delay: 0 },
-            { value: "10+", label: "Universities", delay: 90 },
+            { value: "22", label: "Universities", delay: 90 },
             { value: "100%", label: "Free to use", delay: 180 },
             { value: "Open", label: "Source", delay: 270 },
           ].map((stat) => (
@@ -217,50 +227,32 @@ export default function Home() {
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div data-sb-scroll data-sb-delay="0" style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 24, marginBottom: 48 }}>
             <div>
-              <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "oklch(40% 0.18 245)", marginBottom: 10 }}>Featured</div>
+              <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "oklch(40% 0.18 245)", marginBottom: 10 }}>All universities</div>
               <h2 style={{ fontFamily: "'Instrument Serif',serif", fontSize: 46, color: "oklch(14% 0.05 245)", letterSpacing: "-0.02em", lineHeight: 1.08 }}>Universities in the database</h2>
             </div>
             <a href="#search" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 500, color: "oklch(40% 0.18 245)", whiteSpace: "nowrap", paddingBottom: 4 }}>Search all →</a>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-
-            <div data-sb-scroll data-sb-delay="0" style={{ background: "white", border: "1px solid oklch(91% 0.02 245)", borderRadius: 16, padding: 36, display: "flex", flexDirection: "column" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
-                <div>
-                  <span style={{ display: "inline-block", fontFamily: "'DM Sans',sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "oklch(38% 0.16 245)", background: "oklch(94% 0.05 245)", padding: "3px 9px", borderRadius: 4, marginBottom: 10 }}>Belgium</span>
-                  <h3 style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 21, fontWeight: 600, color: "oklch(14% 0.05 245)", marginBottom: 3 }}>KU Leuven</h3>
-                  <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, color: "oklch(52% 0.025 245)" }}>Leuven, Belgium</p>
+            {universities.map((u, i) => (
+              <div key={u.name} data-sb-scroll data-sb-delay={Math.min(i * 80, 400)} style={{ background: "white", border: "1px solid oklch(91% 0.02 245)", borderRadius: 16, padding: 36, display: "flex", flexDirection: "column" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
+                  <div>
+                    <span style={{ display: "inline-block", fontFamily: "'DM Sans',sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "oklch(38% 0.16 245)", background: "oklch(94% 0.05 245)", padding: "3px 9px", borderRadius: 4, marginBottom: 10 }}>{u.country}</span>
+                    <h3 style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 21, fontWeight: 600, color: "oklch(14% 0.05 245)", marginBottom: 3 }}>{u.name}</h3>
+                    <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, color: "oklch(52% 0.025 245)" }}>{u.city}, {u.country}</p>
+                  </div>
+                </div>
+                <div style={{ borderTop: "1px solid oklch(94% 0.01 245)", paddingTop: 18, marginBottom: 22 }}>
+                  <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13.5, fontWeight: 500, color: "oklch(40% 0.18 245)", marginBottom: 6 }}>{u.scholarship}</p>
+                  <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, color: "oklch(52% 0.025 245)" }}>Requirements: {u.requirements}</p>
+                </div>
+                <div style={{ display: "flex", gap: 10, marginTop: "auto" }}>
+                  <a href={u.website} target="_blank" rel="noreferrer" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 500, color: "oklch(40% 0.18 245)", border: "1.5px solid oklch(82% 0.1 245)", padding: "9px 18px", borderRadius: 7, display: "inline-block" }}>Visit website →</a>
+                  <a href={u.apply} target="_blank" rel="noreferrer" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 500, color: "white", background: "oklch(40% 0.18 245)", padding: "9px 18px", borderRadius: 7, display: "inline-block" }}>Apply →</a>
                 </div>
               </div>
-              <div style={{ borderTop: "1px solid oklch(94% 0.01 245)", paddingTop: 18, marginBottom: 22 }}>
-                <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13.5, fontWeight: 500, color: "oklch(40% 0.18 245)", marginBottom: 6 }}>KU Leuven Scholarships</p>
-                <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, color: "oklch(52% 0.025 245)" }}>Requirements: Secondary school diploma</p>
-              </div>
-              <div style={{ display: "flex", gap: 10, marginTop: "auto" }}>
-                <a href="https://www.kuleuven.be" target="_blank" rel="noreferrer" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 500, color: "oklch(40% 0.18 245)", border: "1.5px solid oklch(82% 0.1 245)", padding: "9px 18px", borderRadius: 7, display: "inline-block" }}>Visit website →</a>
-                <a href="https://www.kuleuven.be/english/admissions" target="_blank" rel="noreferrer" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 500, color: "white", background: "oklch(40% 0.18 245)", padding: "9px 18px", borderRadius: 7, display: "inline-block" }}>Apply →</a>
-              </div>
-            </div>
-
-            <div data-sb-scroll data-sb-delay="160" style={{ background: "white", border: "1px solid oklch(91% 0.02 245)", borderRadius: 16, padding: 36, display: "flex", flexDirection: "column" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
-                <div>
-                  <span style={{ display: "inline-block", fontFamily: "'DM Sans',sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "oklch(38% 0.16 245)", background: "oklch(94% 0.05 245)", padding: "3px 9px", borderRadius: 4, marginBottom: 10 }}>Belgium</span>
-                  <h3 style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 21, fontWeight: 600, color: "oklch(14% 0.05 245)", marginBottom: 3 }}>Ghent University</h3>
-                  <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, color: "oklch(52% 0.025 245)" }}>Ghent, Belgium</p>
-                </div>
-              </div>
-              <div style={{ borderTop: "1px solid oklch(94% 0.01 245)", paddingTop: 18, marginBottom: 22 }}>
-                <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13.5, fontWeight: 500, color: "oklch(40% 0.18 245)", marginBottom: 6 }}>UGent Top-up Grants</p>
-                <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, color: "oklch(52% 0.025 245)" }}>Requirements: Secondary school diploma</p>
-              </div>
-              <div style={{ display: "flex", gap: 10, marginTop: "auto" }}>
-                <a href="https://www.ugent.be" target="_blank" rel="noreferrer" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 500, color: "oklch(40% 0.18 245)", border: "1.5px solid oklch(82% 0.1 245)", padding: "9px 18px", borderRadius: 7, display: "inline-block" }}>Visit website →</a>
-                <a href="https://www.ugent.be/en" target="_blank" rel="noreferrer" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 500, color: "white", background: "oklch(40% 0.18 245)", padding: "9px 18px", borderRadius: 7, display: "inline-block" }}>Apply →</a>
-              </div>
-            </div>
-
+            ))}
           </div>
         </div>
       </section>
@@ -327,6 +319,8 @@ export default function Home() {
           <a href="https://github.com/scholarships-benelux/scholarships" target="_blank" rel="noreferrer" style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, color: "oklch(56% 0.04 245)" }}>GitHub →</a>
         </div>
       </footer>
+
+      {showMap && <NearbyMap onClose={() => setShowMap(false)} />}
     </>
   );
 }

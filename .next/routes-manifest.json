@@ -40,6 +40,12 @@
       "regex": "^/_not\\-found(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/api/geocode",
+      "regex": "^/api/geocode(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/geocode(?:/)?$"
     }
   ],
   "dataRoutes": [],

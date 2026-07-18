@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/app/globals.css"],"sourcesContent":["*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }\nhtml { scroll-behavior: smooth; }\nbody { background: oklch(98% 0.008 245); color: oklch(15% 0.04 245); }\ninput:focus { outline: none; }\na { text-decoration: none; color: inherit; }\nbutton { cursor: pointer; border: none; background: none; }\n::placeholder { color: oklch(62% 0.015 245); }\n::selection { background: oklch(42% 0.18 245 / 0.15); }\n"],"names":[],"mappings":"AAAA;;;;;;AACA;;;;AACA;;;;;;;AACA;;;;AACA;;;;;AACA;;;;;;AACA;;;;;AACA"}}]
+}

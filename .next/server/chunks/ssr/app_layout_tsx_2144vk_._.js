@@ -1,3 +1,3 @@
-module.exports=[33290,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function({children:a}){return(0,b.jsx)("html",{lang:"en",children:(0,b.jsx)("body",{children:a})})},"metadata",0,{title:"Benelux University"}])},70864,a=>{a.n(a.i(33290))}];
+module.exports=[33290,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function({children:a}){return(0,b.jsxs)("html",{lang:"en",children:[(0,b.jsx)("head",{children:(0,b.jsx)("link",{href:"https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap",rel:"stylesheet"})}),(0,b.jsx)("body",{children:a})]})},"metadata",0,{title:"Scholarships Benelux — Find your scholarship"}])},70864,a=>{a.n(a.i(33290))}];
 
 //# sourceMappingURL=app_layout_tsx_2144vk_._.js.map

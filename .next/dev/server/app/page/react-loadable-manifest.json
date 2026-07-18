@@ -1,1 +1,10 @@
-{}
+{
+  "[project]/app/components/NearbyMap.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/app/components/NearbyMap.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/node_modules_05ecdxo._.js",
+      "static/chunks/app_components_NearbyMap_tsx_067pq-f._.js",
+      "static/chunks/app_components_NearbyMap_tsx_0h33fl2._.js"
+    ]
+  }
+}
